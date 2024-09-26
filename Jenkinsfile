@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Start building...'
-                 withMaven(maven: 'Maven 3.6') {
+                 withMaven() {
                         sh 'mvn clean package'
                     }
             }

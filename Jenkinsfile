@@ -12,7 +12,9 @@ pipeline {
                   script {
                     // Build the Docker image
                     sh 'docker build -t my-node-app:latest .'
-                    sh 'docker login -u jennyng -p SIT753password'
+                   withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                    }
                     
                     // Push the Docker image to Docker Hub
                     sh 'docker push my-node-app:latest'

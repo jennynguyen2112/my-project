@@ -12,13 +12,13 @@ pipeline {
                 echo 'Start building...'
                   script {
                     // Build the Docker image
-                    sh 'docker build -t my-node-app:latest .'
+                    bat 'docker build -t my-node-app:latest .'
                    withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                        bat 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
                     }
                     
                     // Push the Docker image to Docker Hub
-                    sh 'docker push my-node-app:latest'
+                    bat 'docker push my-node-app:latest'
                       
                 }
             }
@@ -45,13 +45,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'deploying'
-                sh 'docker-compose up -d' 
+                bat 'docker-compose up -d' 
             }
         }
         stage('Release') {
             steps {
                 echo 'Releasing'
-                sh 'octopus-cli deploy-release'
+                bat 'octopus-cli deploy-release'
             }
         }
         stage('Monitoring and Alerting') {

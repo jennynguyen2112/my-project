@@ -12,6 +12,11 @@ pipeline {
                   script {
                     // Build the Docker image
                     sh 'docker build -t my-node-app:latest .'
+                    sh 'docker login -u jennyng -p SIT753password'
+                    
+                    // Push the Docker image to Docker Hub
+                    sh 'docker push my-node-app:latest'
+                      
                 }
             }
         }

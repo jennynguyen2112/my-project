@@ -4,6 +4,7 @@ pipeline {
         DIRECTORY_PATH = 'C:/Users/phuon/Downloads/Trimester 2.2024/SIT753 Professional Practice in IT/Week 6'
         TESTING_ENVIRONMENT = 'Test_Env'
         PRODUCTION_ENVIRONMENT = 'Prod_env'
+        DOCKER_CREDENTIALS_ID = 'docker-hub-creds'
     }
     stages {
         stage('Build') {

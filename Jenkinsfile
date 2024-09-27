@@ -4,7 +4,6 @@ pipeline {
         DIRECTORY_PATH = 'C:/Users/phuon/Downloads/Trimester 2.2024/SIT753 Professional Practice in IT/Week 6'
         TESTING_ENVIRONMENT = 'Test_Env'
         PRODUCTION_ENVIRONMENT = 'Prod_env'
-        DOCKER_CREDENTIALS_ID = 'docker-hub-creds'
     }
     stages {
         stage('Build') {
@@ -13,14 +12,6 @@ pipeline {
                   script {
                     // Build the Docker image
                     bat 'docker build -t my-node-app:latest .'
-                   withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        bat """
-                            echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-                        """
-                    }
-                    
-                    // Push the Docker image to Docker Hub
-                    bat 'docker push my-node-app:latest'
                       
                 }
             }

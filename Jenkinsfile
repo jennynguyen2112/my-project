@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo 'Running tests...'
                 echo "integration tests"
-                sh 'mvn test' 
+                bat 'mvn test' 
             }
           
         }

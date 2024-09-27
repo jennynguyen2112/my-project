@@ -9,9 +9,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Start building...'
-                 withMaven() {
-                        sh 'mvn clean package'
-                    }
+                  script {
+                    // Build the Docker image
+                    sh 'docker build -t my-node-app:latest .'
+                }
             }
         }
         stage('Test') {
